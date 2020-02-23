@@ -6,6 +6,7 @@
         <q-img :ratio="16/9" :src="ogp.image">
           <bookmark-button v-if="hasLogin" :ogp="ogp"/>
           <q-btn v-else round color="light-blue" :icon="matBookmarkBorder"  size="lg" class="absolute-top-right q-ma-sm" dense push style="opacity: .6" :to="{ name: 'auth' }"/>
+          <q-btn v-if="hasLogin && ogp.user_id === user.id" icon="delete" dense round color="white" class="absolute-bottom-right text-black q-ma-sm" @click="deleteOgp(ogp)"/>
         </q-img>
 
         <q-card-section>
@@ -42,7 +43,7 @@ export default {
   watch: {
     '$store.state.auth.authState': {
       handler: function (authState, from) {
-        if (authState === config.AUTH_STATE_LOGIN) {
+        if (this.hasLogin) {
           this.$store.dispatch('bookmark/GetBookmarks')
         }
       },
@@ -62,6 +63,10 @@ export default {
         return bookmarkIds.includes(ogp.id)
       }
       return false
+    },
+    async deleteOgp (ogp) {
+      await this.$store.dispatch('ogp/Delete', { payload: ogp })
+      await this.$store.dispatch('ogp/Get')
     }
   },
   computed: {

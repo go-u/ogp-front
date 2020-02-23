@@ -21,7 +21,13 @@ export async function Preview (context, { payload }) {
 export async function Add (context, { payload }) {
   if (firebase.auth().currentUser) {
     const token = await firebase.auth().currentUser.getIdToken(false).catch((err) => { console.error(err); return null })
-    console.log(payload)
     await BaseRequest({ url: '/api/v1/ogps', method: 'post', payload: payload, token: token })
+  }
+}
+
+export async function Delete (context, { payload }) {
+  if (firebase.auth().currentUser) {
+    const token = await firebase.auth().currentUser.getIdToken(false).catch((err) => { console.error(err); return null })
+    await BaseRequest({ url: '/api/v1/ogps/delete', method: 'post', payload: payload, token: token })
   }
 }
