@@ -6,8 +6,8 @@
         class="q-gutter-y-sm q-pt-lg"
         style="width: 300px"
       >
-        <q-card-section v-if="showError" class="text-red text-center text-body1">
-          このURLにはOGP画像がありません
+        <q-card-section v-if="errorMessage" class="text-red text-center text-body1">
+          {{ errorMessage }}
         </q-card-section>
 
         <div class="column q-gutter-y-md">
@@ -53,7 +53,7 @@ export default {
       url: '',
       patternUrl: /^.{1,30}$/i,
       loadingBtn: false,
-      showError: false
+      errorMessage: ''
     }
   },
   methods: {
@@ -63,14 +63,18 @@ export default {
     onSubmit: function () {
       this.extractFQDN()
       this.loadingBtn = true
-      this.showError = false
+      this.errorMessage = ''
       const payload = { fqdn: this.url }
       this.$store.dispatch('ogp/Preview', { payload: payload })
         .then((ogp) => {
           this.$router.push({ name: 'preview' })
         }).catch((err) => {
           console.log(err.message)
-          this.showError = true
+          if (err.message === ('ogp exist')) {
+            this.errorMessage = 'このURLは登録済みです'
+          } else {
+            this.errorMessage = 'このURLにはOGP画像がありません'
+          }
         }).finally(() => {
           this.loadingBtn = false
         })
