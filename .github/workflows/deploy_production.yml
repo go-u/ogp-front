@@ -1,7 +1,10 @@
 name: Production
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - master
+#  release:
+#    types: [published]
 
 jobs:
   deploy:
