@@ -11,6 +11,9 @@
         <q-card-section>
           <div class="text-h6 ellipsis">{{ ogp.title }}</div>
           <a :href="ogp.url" target="_blank" style="text-decoration: unset"><div class="text-subtitle2 text-grey-7 ellipsis">{{ ogp.url }}</div></a>
+          <q-badge floating v-if="ogp.bookmarks" class="text-caption" transparent>
+            {{ ogp.bookmarks }}ブックマーク
+          </q-badge>
         </q-card-section>
 
         <q-card-section class="q-pt-none ellipsis">
