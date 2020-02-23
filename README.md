@@ -39,5 +39,5 @@ E2Eテストのサンプル
 ## CI/CDについて
 - [プッシュ時にユニットテスト](https://github.com/go-u/ogp-front/blob/master/.github/workflows/test.yml)
 - [プルリク時に自動デプロイ&E2Eテストを実行](https://github.com/go-u/ogp-front/blob/master/.github/workflows/deploy_staging.yml)
-- [リリース時にプロダクション環境に自動デプロイ](https://github.com/go-u/ogp-front/blob/master/.github/workflows/deploy_production.yml)
+- [マージ時にプロダクション環境に自動デプロイ](https://github.com/go-u/ogp-front/blob/master/.github/workflows/deploy_production.yml)
 (E2Eテストの動画はGithubに自動アップロードしています)
