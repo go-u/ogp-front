@@ -61,9 +61,10 @@ export default {
       this.$router.go(-1)
     },
     onSubmit: function () {
+      this.extractFQDN()
       this.loadingBtn = true
       this.showError = false
-      const payload = { url: this.url }
+      const payload = { fqdn: this.url }
       this.$store.dispatch('ogp/Preview', { payload: payload })
         .then((ogp) => {
           this.$router.push({ name: 'preview' })
@@ -73,6 +74,13 @@ export default {
         }).finally(() => {
           this.loadingBtn = false
         })
+    },
+    extractFQDN: function () {
+      const regexSchema = /.+:\/\//i
+      const fqdnWithPath = this.url.replace(regexSchema, '')
+      const regexPath = /\/.*/g
+      const fqdn = fqdnWithPath.replace(regexPath, '')
+      this.url = fqdn
     }
   },
   computed: {

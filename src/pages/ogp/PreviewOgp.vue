@@ -42,10 +42,16 @@ export default {
     },
     async send () {
       this.loadingBtn = true
-      await this.$store.dispatch('ogp/Add', { payload: { url: this.preview.url } })
+      await this.$store.dispatch('ogp/Add', { payload: { fqdn: this.getFQDN(this.preview.url) } })
       await this.$store.dispatch('ogp/Get')
       this.loadingBtn = false
       this.$router.push({ name: 'top' })
+    },
+    getFQDN: function (url) {
+      const regexSchema = /.+:\/\//i
+      const fqdnWithPath = url.replace(regexSchema, '')
+      const regexPath = /\/.*/g
+      return fqdnWithPath.replace(regexPath, '')
     }
   },
   computed: {
