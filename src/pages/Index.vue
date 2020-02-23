@@ -81,15 +81,15 @@ export default {
     ogpInfos () {
       if (this.$route.name === 'bookmarks') {
         return this.bookmarks
-      } else if (this.$route.query.order === 'popular') {
-        return this.ogps
-      } else {
+      } else if (this.$route.query.order === 'newer') {
         const ogpInfos = this.ogps.slice()
         ogpInfos.sort(function (a, b) {
           return new Date(a.created_at).valueOf() - new Date(b.created_at).valueOf()
         })
         console.log(ogpInfos)
         return ogpInfos
+      } else {
+        return this.ogps
       }
     }
   }
