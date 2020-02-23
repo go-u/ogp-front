@@ -1,0 +1,21 @@
+{
+  "appId": "ogp.gal.debug",
+  "appName": "OGP Gal",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false
+    },
+    "CapacitorFirebaseAuth": {
+      "providers": [
+        "google.com",
+        "twitter.com"
+      ]
+    }
+  },
+  "server": {
+    "url": "http://192.168.10.140:8080"
+  }
+}

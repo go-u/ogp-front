@@ -1,0 +1,14 @@
+{
+  "name": "ogp-gal-front",
+  "version": "0.0.1",
+  "description": "OGP Gallery",
+  "author": "go-u <53477091+go-u@users.noreply.github.com>",
+  "private": true,
+  "dependencies": {
+    "@capacitor/android": "^1.5.0",
+    "@capacitor/cli": "^1.0.0",
+    "@capacitor/core": "^1.0.0",
+    "@capacitor/ios": "^1.5.0",
+    "capacitor-firebase-auth": "^0.3.0"
+  }
+}

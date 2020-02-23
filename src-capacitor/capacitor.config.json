@@ -1,0 +1,18 @@
+{
+  "appId": "ogp.gal",
+  "appName": "OGP Gal",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false
+    },
+    "CapacitorFirebaseAuth": {
+      "providers": [
+        "google.com",
+        "twitter.com"
+      ]
+    }
+  }
+}

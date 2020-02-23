@@ -1,0 +1,51 @@
+{
+  "@quasar/icon-genie": {
+    "minify_dev": "pngquant",
+    "minify_build": "pngquant",
+    "cordova": {
+      "background_color": "#191515",
+      "splashscreen_type": "generate"
+    },
+    "build_always": false,
+    "__internal": {
+      "dev": {
+        "spa": {
+          "iconHash": "be42fd94c1355a236ed68bf187c60481"
+        },
+        "capacitor": {
+          "iconHash": "be42fd94c1355a236ed68bf187c60481",
+          "splashscreenHash": false,
+          "splashscreenType": "generate",
+          "backgroundColor": "#191515"
+        }
+      },
+      "build": {
+        "capacitor": {
+          "iconHash": "be42fd94c1355a236ed68bf187c60481",
+          "splashscreenHash": false,
+          "splashscreenType": "generate",
+          "backgroundColor": "#191515"
+        }
+      }
+    }
+  },
+  "@quasar/testing": {
+    "harnesses": [
+      "unit-jest",
+      "e2e-cypress"
+    ]
+  },
+  "@quasar/testing-unit-jest": {
+    "babel": "babelrc",
+    "options": [
+      "scripts",
+      "SFC"
+    ]
+  },
+  "@quasar/testing-e2e-cypress": {
+    "options": [
+      "scripts"
+    ]
+  },
+  "@quasar/qribbon": {}
+}

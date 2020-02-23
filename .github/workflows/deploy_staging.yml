@@ -1,0 +1,41 @@
+name: Staging
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: yarn install
+      - run: npx quasar build
+
+      - name: Deploy to netlify
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_STAGING }}
+        with:
+          args: deploy --prod --dir=dist/spa
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+
+      - name: E2E Test
+        run: npx cypress run --env E2E_LOGIN_ID=$E2E_LOGIN_ID,E2E_LOGIN_PASS=$E2E_LOGIN_PASS
+        env:
+          E2E_LOGIN_ID: ${{ secrets.E2E_LOGIN_ID }}
+          E2E_LOGIN_PASS: ${{ secrets.E2E_LOGIN_PASS }}
+          STAGING_URL: ${{ secrets.STAGING_URL }}
+
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: E2E VIDEO
+          path: ./test/cypress/videos
