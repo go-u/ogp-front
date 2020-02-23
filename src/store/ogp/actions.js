@@ -13,7 +13,7 @@ export async function Get (context) {
 export async function Preview (context, { payload }) {
   const ogpInfo = await BaseRequest({ url: '/api/v1/ogps/preview', method: 'post', payload: payload })
     .then((res) => res.data)
-    .catch((err) => { console.log(err); throw new Error(err) })
+    .catch((err) => { console.log(err.response); throw new Error(err.response.data.error) })
   context.commit('preview', { preview: ogpInfo })
   return ogpInfo
 }
