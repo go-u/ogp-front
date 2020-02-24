@@ -69,6 +69,10 @@
       <q-img :src="croppedImg" style="width: 60%;max-width: 200px;border-radius: 50%;border: 1px solid grey"/>
       <div class="text-body1 q-pt-sm">{{ displayName }}</div>
 
+      <div v-if="step === 3" class="text-center q-pt-lg">
+        <q-btn label="利用規約等" type="a" target="_blank" flat href="/tos"/>
+      </div>
+
     </q-step>
 
     <template v-slot:navigation>
