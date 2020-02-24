@@ -22,7 +22,7 @@
             :placeholder="displayName || $store.state.auth.user.displayname"
             counter
             hint="1文字以上"
-            maxlength="30"
+            maxlength="50"
             lazy-rules
             :rules="[
               val => val !== null && val !== '' || 'Please enter name',
@@ -57,7 +57,7 @@ export default {
       displayName: '',
       description: this.$store.state.auth.user.description,
       patternUsername: /^[a-z0-9_]{1,15}$/i,
-      patternDisplayname: /^.{1,30}$/i,
+      patternDisplayname: /^.{1,50}$/i,
       loadingBtn: false
     }
   },
