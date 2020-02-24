@@ -19,7 +19,7 @@
         <div v-if="!$q.platform.is.mobile" id="ribbon-margin"/>
       </q-toolbar>
       <q-ribbon v-if="!$q.platform.is.mobile" class="github-text text-weight-bolder" position="top-right" type="corner" color="white" background-color="black" style="font-size: 12px">
-        <a href="https://github.com/go-u/ogp-gal-front" target="_blank" style="text-decoration: none;border-top: 1px solid white;border-bottom: 1px solid white;padding: 4px 0" class="q-ml-sm">Fork me on GITHUB</a>
+        <a href="https://github.com/go-u/ogp-index" target="_blank" style="text-decoration: none;border-top: 1px solid white;border-bottom: 1px solid white;padding: 4px 0" class="q-ml-sm">Fork me on GITHUB</a>
       </q-ribbon>
     </q-header>
 
