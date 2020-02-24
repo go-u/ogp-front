@@ -16,19 +16,17 @@
       <q-input
         filled
         v-model="displayName"
-        label="ユーザ名"
+        label="ニックネーム"
         type="text"
-        hint="親しみやすい名前をつけましょう"
+        hint="後から変更できます"
         counter
         maxlength="15"
         lazy-rules
         :rules="[ val =>(0 < (val).length && (val).length < (16) ) || '1文字以上、15文字以内']"
         @keyup.enter="displayName.length > 0 ? $refs.stepper.next() : null"
       >
-        <template v-slot:append>
-          <q-icon name="sentiment_satisfied_alt"/>
-        </template>
       </q-input>
+
     </q-step>
 
     <q-step
@@ -70,6 +68,10 @@
     >
       <q-img :src="croppedImg" style="width: 60%;max-width: 200px;border-radius: 50%;border: 1px solid grey"/>
       <div class="text-body1 q-pt-sm">{{ displayName }}</div>
+
+      <div v-if="step === 3" class="text-center q-pt-lg">
+        <q-btn label="利用規約等" type="a" target="_blank" flat href="/tos"/>
+      </div>
 
     </q-step>
 
