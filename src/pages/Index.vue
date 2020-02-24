@@ -85,7 +85,7 @@ export default {
       } else if (this.$route.query.order === 'newer') {
         const ogpInfos = this.ogps.slice()
         ogpInfos.sort(function (a, b) {
-          return new Date(a.created_at).valueOf() - new Date(b.created_at).valueOf()
+          return new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf()
         })
         console.log(ogpInfos)
         return ogpInfos
