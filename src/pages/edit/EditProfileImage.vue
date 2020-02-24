@@ -40,6 +40,7 @@
         :enlarge="3"
         style="width: 300px; height: 150px;margin: 0 auto"
       ></vue-cropper>
+      <div v-if="option.img" class="text-center text-body1 text-weight-medium q-pt-xs">{{ $q.platform.is.mobile ? '画面をピンチして拡大・縮小' : 'マウスホイールで拡大・縮小'  }}</div>
       <input type="file" id="image" accept="image/png, image/jpeg, image/gif, image/jpg" @change="readImg($event)" style="display: none">
     </q-card-section>
 
