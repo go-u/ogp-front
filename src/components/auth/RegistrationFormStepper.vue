@@ -20,9 +20,9 @@
         type="text"
         hint="後から変更できます"
         counter
-        maxlength="15"
+        maxlength="50"
         lazy-rules
-        :rules="[ val =>(0 < (val).length && (val).length < (16) ) || '1文字以上、15文字以内']"
+        :rules="[ val =>(0 < (val).length && (val).length < (51) ) || '1文字以上、50文字以内']"
         @keyup.enter="displayName.length > 0 ? $refs.stepper.next() : null"
       >
       </q-input>
