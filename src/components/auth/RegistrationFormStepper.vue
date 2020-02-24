@@ -57,6 +57,7 @@
         :enlarge="1"
         style="width: 90%;padding-top: 90%; margin: 0 auto"
       ></vue-cropper>
+      <div v-if="option.img" class="text-center text-body1 text-weight-medium q-pt-xs">{{ $q.platform.is.mobile ? '画面をピンチして拡大・縮小' : 'マウスホイールで拡大・縮小'  }}</div>
       <input type="file" id="image" accept="image/png, image/jpeg, image/gif, image/jpg" @change="readImg($event)" style="display: none">
       <q-btn icon="photo" size="1.17rem" @click="input" label="アイコン画像を選択" color="light-blue" class="full-width q-my-md"/>
     </q-step>
