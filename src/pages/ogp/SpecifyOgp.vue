@@ -16,9 +16,7 @@
             v-model="url"
             label="ウェブサイトのURL"
             placeholder="https://ogp-gal.com"
-            counter
             hint="URLを入力"
-            maxlength="30"
             lazy-rules
             :rules="[
               val => val !== null && val !== '' || 'URLを入力',
@@ -51,7 +49,7 @@ export default {
   data () {
     return {
       url: '',
-      patternUrl: /^.{1,30}$/i,
+      patternUrl: /^.{1,500}$/i,
       loadingBtn: false,
       errorMessage: ''
     }
