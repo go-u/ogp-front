@@ -11,7 +11,7 @@
 
         <q-card-section>
           <div class="text-h6 ellipsis">{{ ogp.title }}</div>
-          <a :href="ogp.url" target="_blank" style="text-decoration: unset"><div class="text-subtitle2 text-grey-7 ellipsis">{{ ogp.url }}</div></a>
+          <a :href="ogp.url" target="_blank" style="text-decoration: unset"><div class="text-subtitle2 text-grey-7 ellipsis">{{ ogp.url }} <q-icon :name="matOpenInNew" style="bottom: 1px"/></div></a>
           <q-badge floating v-if="ogp.bookmarks" class="text-caption" transparent>
             {{ ogp.bookmarks }}ブックマーク
           </q-badge>
@@ -29,7 +29,7 @@
 <script>
 import config from '../../config/config'
 import { mapState } from 'vuex'
-import { matBookmarkBorder, matDone } from '@quasar/extras/material-icons'
+import { matBookmarkBorder, matDone, matOpenInNew } from '@quasar/extras/material-icons'
 import BookmarkButton from '../components/ogp/BookmarkButton'
 
 export default {
@@ -76,7 +76,8 @@ export default {
       ogps: state => state.ogp.ogps,
       hasLogin: state => state.auth.authState === config.AUTH_STATE_LOGIN,
       matBookmarkBorder: () => matBookmarkBorder,
-      matDone: () => matDone
+      matDone: () => matDone,
+      matOpenInNew: () => matOpenInNew
     }),
     ogpInfos () {
       if (this.$route.name === 'bookmarks') {
