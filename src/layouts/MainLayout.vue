@@ -11,7 +11,7 @@
           <q-btn :icon="$store.state.auth.authState === 'AUTH_STATE_LOGIN' ? undefined : matBookmarkBorder" label="OGP GAL" flat class="text-amber-4 text-weight-bolder" style="letter-spacing: 1px" size="lg" dense :to="{ name: 'top' }"/>
         </q-toolbar-title>
         <q-tabs v-if="!$q.platform.is.mobile" inline-label align="right">
-          <q-route-tab :icon="matStars" :to="{ name: 'top', query: { order: 'popular' } }" label="人気順"/>
+          <q-route-tab :icon="matStars" :class="$route.name==='top' && !$route.query.order ? 'show_indicator' : ''" :to="{ name: 'top', query: { order: 'popular' } }" label="人気順"/>
           <q-route-tab :icon="matFiberNew" :to="{ name: 'top', query: { order: 'newer' } }" label="新着順" />
           <q-route-tab :icon="matBookmark" :to="{ name: 'bookmarks' }" label="ブックマーク" />
         </q-tabs>
@@ -114,4 +114,7 @@ export default {
 
 #ribbon-margin
   margin-right: 110px
+
+.show_indicator > div
+  opacity: 1!important
 </style>
