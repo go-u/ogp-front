@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
     <div v-if="$route.name==='bookmarks' && bookmarks.length === 0" class="text-h5">まだブックマークしていません</div>
-    <div class="text-center q-pt-md" :class="$q.platform.is.mobile ? 'text-h5' : 'text-h2 q-pb-xs'">OGP Design Gallery</div>
+    <div v-if="$route.name==='top'" class="text-center q-pt-md" :class="$q.platform.is.mobile ? 'text-h5' : 'text-h2 q-pb-xs'">OGP Design Gallery</div>
     <div class="q-pa-md row justify-center q-gutter-lg">
       <q-card v-for="ogp in ogpInfos" v-bind:key="ogp.id" class="ogp-card" v-show="$route.name!=='bookmarks' || hasBookMarked(ogp)">
         <q-img :ratio="16/9" :src="ogp.image">
