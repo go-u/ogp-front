@@ -3,7 +3,7 @@
 ![](https://github.com/go-u/ogp-front/workflows/Production/badge.svg)
 
 <h1 align="center">OGP Gallery</h1>
-<p align="center"><img src="./docs/systems.png" alt="Systems"></p>
+<p align="center"><img src="https://github.com/go-u/ogp-index/blob/master/docs/systems.jpg" alt="Systems"></p>
 
 ## フロント部分概要
 このリポジトリには以下が含まれます
