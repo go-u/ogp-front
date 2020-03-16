@@ -1,6 +1,3 @@
-export function ogps (state, payload) {
-  state.ogps = payload.ogps
-}
-export function preview (state, payload) {
-  state.preview = payload.preview
+export function ranking (state, payload) {
+  state.rankingItems = payload.rankingItems
 }

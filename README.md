@@ -5,39 +5,37 @@
 <h1 align="center">OGP Gallery</h1>
 <p align="center"><img src="https://github.com/go-u/ogp-index/blob/master/docs/systems.jpg" alt="Systems"></p>
 
-## フロント部分概要
-このリポジトリには以下が含まれます
-- Web版のSPAのコード
-- Android/iOS版のCapacitorのコード
-- テストコード(ユニットテストはJest / E2EテストはCypress)
-- CI/CDのコード
+## ハイライト
+### :iphone: WebとAndroid/iOSアプリ版を同時リリース    
 
+### :snowflake: CPU負荷を意識したコーディング(Object.freezeでリアクティブを制限)  
+ 
+### :star2: 省メモリを意識したコーディング(モバイル版に仮想スクロールを実装)  
+  
+<img src="https://tangbc.github.io/github-images/virtual-scroll-list-how-works.gif">  
+gif by tangbc/vue-virtual-scroll-list
 
-## SPAについて
-Vue製のフレームワークQuasarを利用してスピード重視で作成しました。
-- [SPA部分のコード](https://github.com/go-u/ogp-gal-front/tree/master/src)
-(QuasarはNuxtと同等以上の機能があります)
+## Web版(SPA)について
+Vue製のフレームワークQuasarを利用して作成(QuasarはNuxtと同等以上の機能があります)
+- [SPA部分のコード](https://github.com/go-u/ogp-front/tree/master/src)
 
-## Android/iOSアプリについて
-両アプリともプッシュ通知に対応済みのベータ版として公開中です。
+## Android/iOSアプリ版について
+アプリ版はCordova後継のCapacitorで開発しています。  
 - [Androidのコード](https://github.com/go-u/ogp-front/tree/master/src-capacitor/android)
 - [iOSのコード](https://github.com/go-u/ogp-front/tree/master/src-capacitor/ios)
-
-### アプリ開発の補足
-Cordova後継のCapacitorについて拙作のコミュニティプラグインを公開中です。
-- [公式の掲載情報(Display > Keep Screen On に掲載)](https://capacitor.ionicframework.com/docs/community/plugins/#display)
 - [拙作のCapacitorプラグインのリポジトリ(TypeScript/Java/Swiftを利用)](https://github.com/go-u/capacitor-keep-screen-on)
+- [公式の掲載情報(Display > Keep Screen On に掲載)](https://capacitor.ionicframework.com/docs/community/plugins/#display)
 
 ## テストについて
 ユニットテストのサンプル
-- [ユーザ名変更コンポーネントの'isValidUsername()'をテスト](https://github.com/go-u/ogp-front/blob/master/test/jest/__tests__/Regex.spec.js)
+- [許容できるパスワード強度の正規表現をテスト](https://github.com/go-u/ogp-front/blob/master/test/jest/__tests__/Regex.spec.js)
 
 E2Eテストのサンプル
-- [Firebaseを使ったログイン&ページ遷移が正常に行えるかのテスト](https://github.com/go-u/ogp-front/blob/master/test/cypress/integration/home/login_spec.js)
-- 上記ログインテストの動画を以下のCI/CDにて自動保存
+- [Firebaseを使ったログイン&ページ遷移が正常に行えるかのテスト](https://github.com/go-u/ogp-front/blob/master/test/cypress/integration/home/login_spec.js)  
+  (上記ログインテストの様子は以下のCI/CDにて動画として自動保存しています)
 
 ## CI/CDについて
 - [プッシュ時にユニットテスト](https://github.com/go-u/ogp-front/blob/master/.github/workflows/test.yml)
-- [プルリク時に自動デプロイ&E2Eテストを実行](https://github.com/go-u/ogp-front/blob/master/.github/workflows/deploy_staging.yml)
+- [プルリク時にテスト環境に自動デプロイ&E2Eテストを実行](https://github.com/go-u/ogp-front/blob/master/.github/workflows/deploy_staging.yml)
 - [マージ時にプロダクション環境に自動デプロイ](https://github.com/go-u/ogp-front/blob/master/.github/workflows/deploy_production.yml)
-(E2Eテストの動画はGithubに自動アップロードしています)
+(テスト動画をGithubに自動保存しています)

@@ -1,105 +1,86 @@
 <template>
-  <q-page class="flex flex-center">
-    <div v-if="$route.name==='bookmarks' && bookmarks.length === 0" class="text-h5">まだブックマークしていません</div>
-    <div v-if="$route.name==='top'" class="text-center q-pt-md" :class="$q.platform.is.mobile ? 'text-h5' : 'text-h2 q-pb-xs'">OGP Design Gallery</div>
-    <div class="q-pa-md row justify-center q-gutter-lg">
-      <q-card v-for="ogp in ogpInfos" v-bind:key="ogp.id" class="ogp-card" v-show="$route.name!=='bookmarks' || hasBookMarked(ogp)">
-        <q-img :ratio="16/9" :src="ogp.image">
-          <bookmark-button v-if="hasLogin" :ogp="ogp"/>
-          <q-btn v-else round color="light-blue" :icon="matBookmarkBorder"  size="lg" class="absolute-top-right q-ma-sm" dense push style="opacity: .6" :to="{ name: 'auth' }"/>
-          <q-btn v-if="hasLogin && ogp.user_id === user.id" icon="delete" dense round color="white" class="absolute-bottom-right text-black q-ma-sm" @click="deleteOgp(ogp)"/>
-        </q-img>
+  <q-page class="flex column q-pa-md" style="max-width: 1200px; margin: 0 auto">
 
-        <q-card-section>
-          <div class="text-h6 ellipsis">{{ ogp.title }}</div>
-          <a :href="ogp.url" target="_blank" style="text-decoration: unset"><div class="text-subtitle2 text-grey-7 ellipsis">{{ ogp.url }} <q-icon :name="matOpenInNew" style="bottom: 1px"/></div></a>
-          <q-badge floating v-if="ogp.bookmarks" class="text-caption" transparent>
-            {{ ogp.bookmarks }}ブックマーク
-          </q-badge>
-        </q-card-section>
+    <pickups v-if="$route.name==='top' && !($route.query.page > 1)" class="full-width q-py-sm"/>
 
-        <q-card-section class="q-pt-none ellipsis">
-          {{ ogp.description }}
-        </q-card-section>
+    <template v-if="loading">
+      <div class="text-center">
+        <q-spinner-puff size="1.4rem" color="light-blue"/>
+        ランキング読み込み中
+      </div>
+    </template>
 
-      </q-card>
-    </div>
+    <template v-else>
+      <q-btn label="シェアランキング" flat dense size="lg" class="self-center q-mb-xs" :to="{ name: 'app' }"><q-icon :name="matHelp" size="sm" color="grey"/></q-btn>
+      <lang-filter class="self-center"/>
+      <ranking-with-virtual-scroll v-if="$q.platform.is.mobile" :items="items"/>
+      <ranking-with-paging v-else :items="items"/>
+    </template>
   </q-page>
 </template>
 
 <script>
-import config from '../../config/config'
+import variables from '../../config/variables'
 import { mapState } from 'vuex'
-import { matBookmarkBorder, matDone, matOpenInNew } from '@quasar/extras/material-icons'
-import BookmarkButton from '../components/ogp/BookmarkButton'
+import { matHelp } from '@quasar/extras/material-icons'
+import RankingWithPaging from '../components/list/ListWithPaging'
+import RankingWithVirtualScroll from '../components/list/ListWithVirtualScroll'
+import LangFilter from '../components/top/LangFilter'
+import Pickups from '../components/top/Pickups'
 
 export default {
   name: 'PageIndex',
-  components: { BookmarkButton },
+  components: { Pickups, LangFilter, RankingWithVirtualScroll, RankingWithPaging },
   data () {
     return {
-      text: ''
+      loading: false
     }
   },
   watch: {
+    // Login状態を監視して、ログイン後にBookmarkを取得
     '$store.state.auth.authState': {
-      handler: function (authState, from) {
+      handler () {
         if (this.hasLogin) {
           this.$store.dispatch('bookmark/GetBookmarks')
         }
       },
       immediate: true
-    },
-    $route: {
-      handler: function () {
-        this.$store.dispatch('ogp/Get')
-      },
-      immediate: true
     }
   },
+  created () {
+    this.getRanking()
+  },
   methods: {
-    hasBookMarked (ogp) {
-      if (this.bookmarks.length > 0) {
-        const bookmarkIds = this.bookmarks.map(x => x.id)
-        return bookmarkIds.includes(ogp.id)
-      }
-      return false
-    },
-    async deleteOgp (ogp) {
-      await this.$store.dispatch('ogp/Delete', { payload: ogp })
-      await this.$store.dispatch('ogp/Get')
+    async getRanking () {
+      this.loading = true
+      await this.$store.dispatch('ogp/GetRanking')
+      this.loading = false
     }
   },
   computed: {
     ...mapState({
-      user: state => state.auth.user,
-      bookmarks: state => state.bookmark.bookmarks,
-      ogps: state => state.ogp.ogps,
-      hasLogin: state => state.auth.authState === config.AUTH_STATE_LOGIN,
-      matBookmarkBorder: () => matBookmarkBorder,
-      matDone: () => matDone,
-      matOpenInNew: () => matOpenInNew
+      // svg icon
+      matHelp: () => matHelp,
+      // states
+      hasLogin: state => state.auth.authState === variables.AUTH_STATE_LOGIN,
+      rankingItems: state => state.ogp.rankingItems
     }),
-    ogpInfos () {
-      if (this.$route.name === 'bookmarks') {
-        return this.bookmarks
-      } else if (this.$route.query.order === 'newer') {
-        const ogpInfos = this.ogps.slice()
-        ogpInfos.sort(function (a, b) {
-          return new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf()
-        })
-        console.log(ogpInfos)
-        return ogpInfos
+    items () {
+      const langOption = this.$route.query.lang
+      const sortedItems = this.rankingItems.slice().sort((a, b) => b.count - a.count)
+      if (!langOption) {
+        return sortedItems
       } else {
-        return this.ogps
+        // filter items by lang
+        const filterdItems = []
+        for (const item of sortedItems) {
+          if (item.lang === langOption) {
+            filterdItems.push(item)
+          }
+        }
+        return filterdItems
       }
     }
   }
 }
 </script>
-
-<style lang="sass" scoped>
-.ogp-card
-  width: 100%
-  max-width: 300px
-</style>

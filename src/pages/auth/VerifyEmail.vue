@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import config from '../../../config/config'
+import variables from '../../../config/variables'
 import { matMailOutline } from '@quasar/extras/material-icons'
 import { mapState } from 'vuex'
 
@@ -57,7 +57,7 @@ export default {
       matMailOutline: () => matMailOutline
     }),
     onEmailVerifying () {
-      return this.$store.state.auth.authState === config.AUTH_STATE_ON_EMAIL_VERIFYING
+      return this.$store.state.auth.authState === variables.AUTH_STATE_ON_EMAIL_VERIFYING
     }
   }
 }

@@ -23,6 +23,7 @@
     "@capacitor/core": "^1.5.0",
     "@capacitor/ios": "^1.5.0",
     "@kazupon/vue-i18n-loader": "^0.5.0",
+    "@quasar/cli": "^1.0.5",
     "@quasar/extras": "^1.0.0",
     "@sentry/browser": "^5.12.4",
     "@sentry/integrations": "^5.12.4",
@@ -54,7 +55,7 @@
   "engines": {
     "node": ">= 10.18.1",
     "npm": ">= 6.13.4",
-    "yarn": ">= 1.21.1"
+    "yarn": ">= 1.17.0"
   },
   "browserslist": [
     "last 1 version, not dead, ie >= 11"

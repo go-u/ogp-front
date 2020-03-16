@@ -1,5 +1,5 @@
-import config from '../../../config/config'
-import { BaseRequest } from '../vuex_axios'
+import variables from '../../../config/variables'
+import { BaseRequest } from '../api'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -13,7 +13,7 @@ export function ObserveFirebaseUserAndUpdateAuthState (context) {
       CheckAuthState(context)
     } else {
       context.commit('hasLoginFirebase', { hasLoginFirebase: false })
-      context.commit('authState', { authState: config.AUTH_STATE_LOGOUT })
+      context.commit('authState', { authState: variables.AUTH_STATE_LOGOUT })
       console.log('no firebase user')
     }
   })
@@ -30,11 +30,11 @@ export async function CheckAuthState (context) {
 
   let authState = null
   if (onEmailVerifying) {
-    authState = config.AUTH_STATE_ON_EMAIL_VERIFYING
+    authState = variables.AUTH_STATE_ON_EMAIL_VERIFYING
   } else if (!user) {
-    authState = config.AUTH_STATE_ON_REGISTRATION
+    authState = variables.AUTH_STATE_ON_REGISTRATION
   } else {
-    authState = config.AUTH_STATE_LOGIN
+    authState = variables.AUTH_STATE_LOGIN
   }
   console.log({ authState })
   context.commit('authState', { authState: authState })
@@ -137,7 +137,7 @@ export function GetSelfUserDetail (context) {
     if (firebase.auth().currentUser) {
       firebase.auth().currentUser.getIdToken(false)
         .then((token) => {
-          BaseRequest({ url: '/api/v1/users/me', token: token, method: 'get' })
+          BaseRequest({ url: '/api/users/me', token: token, method: 'get' })
             .then((res) => {
               context.commit('user', { user: res.data })
               resolve(res.data)
@@ -157,15 +157,15 @@ export function GetSelfUserDetail (context) {
 export function RouterPushToRegisterOrLogin (context) {
   console.log(context.state.authState)
   switch (context.state.authState) {
-    case config.AUTH_STATE_LOGOUT:
+    case variables.AUTH_STATE_LOGOUT:
       break
-    case config.AUTH_STATE_ON_EMAIL_VERIFYING:
+    case variables.AUTH_STATE_ON_EMAIL_VERIFYING:
       this.$router.push({ name: 'email-verify' })
       break
-    case config.AUTH_STATE_ON_REGISTRATION:
+    case variables.AUTH_STATE_ON_REGISTRATION:
       this.$router.push({ name: 'registration' })
       break
-    case config.AUTH_STATE_LOGIN:
+    case variables.AUTH_STATE_LOGIN:
       this.$router.push({ name: 'top' })
       break
     default: // null
@@ -179,7 +179,7 @@ export function Register (context, { payload }) {
     if (firebase.auth().currentUser) {
       firebase.auth().currentUser.getIdToken(false)
         .then((token) => {
-          BaseRequest({ url: '/api/v1/users/', token: token, method: 'post', payload: payload })
+          BaseRequest({ url: '/api/users/', token: token, method: 'post', payload: payload })
             .then((res) => {
               context.commit('user', { user: res.data })
               resolve(res.data)

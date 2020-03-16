@@ -1,14 +1,14 @@
 /* eslint-disable */
 
 import * as ctx from  '../../../../quasar.conf.js'
-import config from '../../../../config/config'
+import variables from '../../../../config/variables'
 
 describe('Login Flow', function () {
   beforeEach(() => {
     if (Cypress.env('LOCAL') === 'TRUE') {
       Cypress.baseURL = 'http://localhost:8080'
     } else {
-      Cypress.baseURL = `https://${config.domainsStg[0]}`
+      Cypress.baseURL = `https://${variables.domainsStg[0]}`
     }
     cy.visit(Cypress.baseURL)
   })
@@ -33,9 +33,4 @@ describe('Login Flow', function () {
       expect(loc.pathname).to.eq('/')
     })
   })
-  // it('show tab page', function () {
-  //   cy.visit(`${Cypress.baseURL}/?order=popular`)
-  //   cy.visit(`${Cypress.baseURL}/?order=newer`)
-  //   cy.visit(`${Cypress.baseURL}/bookmarks`)
-  // })
 })
