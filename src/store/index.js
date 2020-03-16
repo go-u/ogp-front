@@ -3,10 +3,9 @@ import Vuex from 'vuex'
 
 import auth from './auth'
 import bookmark from './bookmark'
-import capacitor from './capacitor'
 import initialize from './initialize'
+import native from './native'
 import ogp from './ogp'
-import user from './user'
 
 Vue.use(Vuex)
 
@@ -24,11 +23,9 @@ export default function (/* { ssrContext } */) {
     modules: {
       auth,
       bookmark,
-      capacitor,
       initialize,
-      ogp,
-      user
-      // example
+      native,
+      ogp
     },
 
     // enable strict mode (adds overhead!)

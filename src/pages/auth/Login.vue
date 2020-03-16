@@ -14,7 +14,7 @@
     </div>
     <div v-else class="q-gutter-y-md q-pb-xl">
       <login-with-email-form v-if="$route.name==='login'"/>
-      <register-with-email-form v-else/>
+      <sign-up-with-email-form v-else/>
 
       <q-separator />
 <!--      <div class="text-center">Or Login with</div>-->
@@ -38,12 +38,12 @@
 
 <script>
 import LoginWithEmailForm from '../../components/auth/LoginWithEmailForm'
+import SignUpWithEmailForm from '../../components/auth/SignUpWithEmailForm'
 import { mapState } from 'vuex'
-import RegisterWithEmailForm from '../../components/auth/RegisterWithEmailForm'
 
 export default {
   name: 'PageLogin',
-  components: { RegisterWithEmailForm, LoginWithEmailForm },
+  components: { SignUpWithEmailForm, LoginWithEmailForm },
   data () {
     return {
       loadingBtn: {

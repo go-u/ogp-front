@@ -2,10 +2,10 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import { Platform } from 'quasar'
 import firebaseConfig from '../../../config/firebase'
-import config from 'app/config/config'
+import variables from '../../../config/variables'
 
-const isPrd = config.domainsPrd.includes(document.domain)
-const isStg = config.domainsStg.includes(document.domain)
+const isPrd = variables.domainsPrd.includes(document.domain)
+const isStg = variables.domainsStg.includes(document.domain)
 if (isPrd) {
   firebase.initializeApp(firebaseConfig.firebaseConfigPrd)
 } else if (isStg) {
@@ -16,8 +16,8 @@ if (isPrd) {
 firebase.auth().useDeviceLanguage()
 
 export async function Initialize (context) {
-  context.dispatch('capacitor/ChangeStatusBar', { color: '#2e2e2e' }, { root: true })
-  context.dispatch('capacitor/InitializePushNotification', {}, { root: true })
+  context.dispatch('native/ChangeStatusBar', { color: '#2e2e2e' }, { root: true })
+  context.dispatch('native/InitializePushNotification', {}, { root: true })
   if (!Platform.is.capacitor) {
     // getRedirectResultはfirebaseのObserve登録前に呼び出す必用が有る
     // 処理に時間がかかるためアプリでは省略する

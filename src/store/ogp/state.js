@@ -1,4 +1,3 @@
 export default {
-  ogps: [],
-  preview: {}
+  rankingItems: []
 }

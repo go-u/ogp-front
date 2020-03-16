@@ -4,6 +4,7 @@
     <div class="flex column q-gutter-y-lg text-body2">
       <q-btn label="新規登録" rounded class="full-width" color="light-blue" :to="{ name: 'signup' }" />
       <q-btn id="login-btn" label="ログイン" rounded outline class="full-width" color="grey-10" :to="{ name: 'login' }" />
+      <div class="q-px-xs">ログインするとストック機能やWeb/アプリ連携をご利用頂けます。</div>
     </div>
 
     <div class="absolute-bottom text-center q-pb-md">
@@ -15,14 +16,14 @@
 
 <script>
 import { version } from '../../../package'
-import config from '../../../config/config'
+import variables from '../../../config/variables'
 
 export default {
   name: 'Auth',
   data () {
     return {
       version: version,
-      server: config.domainsPrd.includes(document.domain)
+      server: variables.domainsPrd.includes(document.domain)
     }
   }
 }

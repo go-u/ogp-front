@@ -3,8 +3,9 @@
  * @jest-environment jsdom
  */
 
-import { mount, createLocalVue, shallowMount } from '@vue/test-utils'
-import EditName from 'src/pages/edit/EditName.vue'
+import { createLocalVue, shallowMount } from '@vue/test-utils'
+import SignUpWithEmailForm from 'src/components/auth/SignUpWithEmailForm.vue'
+
 import * as All from 'quasar'
 const { Quasar } = All
 
@@ -16,49 +17,50 @@ const components = Object.keys(All).reduce((object, key) => {
   return object
 }, {})
 
-const $route = {
-  name: 'edit-username'
-}
-const user = {
-  username: 'myname'
-}
-
 describe('Mount Quasar', () => {
   const localVue = createLocalVue()
   localVue.use(Quasar, { components }) // , lang: langEn
 
-  const wrapper = mount(EditName, {
+  const wrapper = shallowMount(SignUpWithEmailForm, {
     localVue,
-    computed: {
-      user () {
-        return user
-      }
-    },
-    mocks: {
-      $route
-    }
   })
   const vm = wrapper.vm
 
-  it('passes the sanity check and creates a wrapper', () => {
-    expect(wrapper.isVueInstance()).toBe(true)
-  })
+  it("パスワード強度テスト", () => {
+    // 8文字以上の数字、英大文字、英小文字が混在すること
+    const localThis = { regex: vm.$data.regex }
+    localThis.password = null
+    expect(SignUpWithEmailForm.computed.isValid.call(localThis)).toBe(false)
 
-  it('has a created hook', () => {
-    expect(typeof vm.isValidUsername).toBe('function')
-  })
+    localThis.password = 'password'
+    expect(SignUpWithEmailForm.computed.isValid.call(localThis)).toBe(false)
 
-  it('Regex Test', () => {
-    vm.$data.userName = "username"
-    expect(vm.isValidUsername()).toBe(true)
+    localThis.password = 'PASSWORD'
+    expect(SignUpWithEmailForm.computed.isValid.call(localThis)).toBe(false)
 
-    vm.$data.userName = "_name_"
-    expect(vm.isValidUsername()).toBe(true)
+    localThis.password = 'PASSWORD1234'
+    expect(SignUpWithEmailForm.computed.isValid.call(localThis)).toBe(false)
 
-    vm.$data.userName = " "
-    expect(vm.isValidUsername()).toBe(false)
+    localThis.password = 'パスワード'
+    expect(SignUpWithEmailForm.computed.isValid.call(localThis)).toBe(false)
 
-    vm.$data.userName = "なまえ"
-    expect(vm.isValidUsername()).toBe(false)
+    localThis.password = 'Password'
+    expect(SignUpWithEmailForm.computed.isValid.call(localThis)).toBe(false)
+
+    localThis.password = 'Password 1234'
+    expect(SignUpWithEmailForm.computed.isValid.call(localThis)).toBe(false)
+
+    localThis.password = 'Pass123'
+    expect(SignUpWithEmailForm.computed.isValid.call(localThis)).toBe(false)
+
+    localThis.password = 'Pass1234'
+    expect(SignUpWithEmailForm.computed.isValid.call(localThis)).toBe(true)
+    
+    // 8文字以上の境界値
+    localThis.password = 'Password1234'
+    expect(SignUpWithEmailForm.computed.isValid.call(localThis)).toBe(true)
+
+    localThis.password = 'Password1234Password1234Password1234Password1234Password1234Password1234Password1234Password1234Password1234Password1234'
+    expect(SignUpWithEmailForm.computed.isValid.call(localThis)).toBe(true)
   })
 })
