@@ -11,7 +11,7 @@
     </template>
 
     <template v-else>
-      <q-btn label="シェアランキング" flat dense size="lg" class="self-center q-mb-xs" :to="{ name: 'app' }"><q-icon :name="matHelp" size="sm" color="grey"/></q-btn>
+      <q-btn label="シェアランキング" flat dense size="lg" class="self-center q-mb-xs" :to="{ name: 'about' }"><q-icon :name="matHelp" size="sm" color="grey"/></q-btn>
       <lang-filter class="self-center"/>
       <ranking-with-virtual-scroll v-if="$q.platform.is.mobile" :items="items"/>
       <ranking-with-paging v-else :items="items"/>
