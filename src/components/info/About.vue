@@ -3,11 +3,10 @@
     <div>
       <div class="text-h6">サービスについて</div>
       <p>OGPのデザイン資料集です。</p>
-      {{ $t('aboutAppTitle') }}
     </div>
     <div>
       <div class="text-h6">集計について</div>
-      <p>デザインの参考指標としてTwitter APIを利用して直近7日間のOGP付きシェアツイートを集計しています。</p>
+      <p>Twitter APIを利用してOGPタグを含むWebページへのリンク付きツイートを集計しています(直近7日分)</p>
     </div>
   </div>
 </template>
