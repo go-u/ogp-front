@@ -27,7 +27,7 @@ export async function Delete (context, { payload }) {
   if (firebase.auth().currentUser) {
     const token = await firebase.auth().currentUser.getIdToken(false).catch((err) => { console.error(err); return null })
     console.log(payload)
-    await BaseRequest({ url: '/api/bookmarks/delete', method: 'post', payload: payload, token: token })
+    await BaseRequest({ url: '/api/bookmark/delete', method: 'post', payload: payload, token: token })
       .then(res => res.data)
       .catch(err => { console.error(err) })
   }
