@@ -179,7 +179,7 @@ export function Register (context, { payload }) {
     if (firebase.auth().currentUser) {
       firebase.auth().currentUser.getIdToken(false)
         .then((token) => {
-          BaseRequest({ url: '/api/users/', token: token, method: 'post', payload: payload })
+          BaseRequest({ url: '/api/users', token: token, method: 'post', payload: payload })
             .then((res) => {
               context.commit('user', { user: res.data })
               resolve(res.data)
