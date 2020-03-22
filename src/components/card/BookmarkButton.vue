@@ -30,8 +30,8 @@ export default {
     async bookmark (ogp) {
       this.loading = true
       await this.$store.dispatch('bookmark/Add', { payload: ogp })
-      await this.$store.dispatch('bookmark/GetBookmarks')
       this.loading = false
+      await this.$store.dispatch('bookmark/GetBookmarks')
     },
     async removeBookmark (ogp) {
       this.loading = true
