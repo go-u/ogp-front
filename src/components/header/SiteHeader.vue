@@ -1,11 +1,13 @@
 <template>
-  <q-toolbar class="base-container">
-    <q-toolbar-title>
-      <q-btn :icon="$q.platform.is.mobile ? undefined : matBookmarkBorder" label="OGPギャラリー" flat class="text-weight-bolder" style="letter-spacing: 1px" size="lg" dense :to="{ name: 'top' }"/>
-    </q-toolbar-title>
+  <q-header class="bg-grey-9 text-white" height-hint="98" :class="$q.platform.is.capacitor && $q.platform.is.ios ? 'q-pt-xs' : ''">
+    <q-toolbar class="base-container">
+      <q-toolbar-title>
+        <q-btn :icon="$q.platform.is.mobile ? undefined : matBookmarkBorder" label="OGPギャラリー" flat class="text-weight-bolder" style="letter-spacing: 1px" size="lg" dense :to="{ name: 'top' }"/>
+      </q-toolbar-title>
 
-    <q-btn label="メニュー" color="amber-4" class="text-black" @click="$emit('left-drawer')"/>
-  </q-toolbar>
+      <q-btn label="メニュー" color="amber-4" class="text-black" @click="$emit('left-drawer')"/>
+    </q-toolbar>
+  </q-header>
 </template>
 
 <script>
@@ -14,7 +16,7 @@ import { mapState } from 'vuex'
 import variables from '../../../config/variables'
 
 export default {
-  name: 'HeaderContent',
+  name: 'SiteHeader',
   methods: {
     getLangQuery (lang) {
       return this.langMap(lang)

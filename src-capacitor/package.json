@@ -1,7 +1,7 @@
 {
   "name": "ogp-gal-front",
   "version": "0.0.1",
-  "description": "OGP Gallery",
+  "description": "Web開発者におすすめのOGPデザイン集。ログインして気に入ったOGP画像をストックしよう！",
   "author": "go-u <53477091+go-u@users.noreply.github.com>",
   "private": true,
   "dependencies": {
