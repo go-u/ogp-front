@@ -1,7 +1,9 @@
 <template>
   <q-layout view="hHh lpR fFf">
 
-    <site-header v-on:left-drawer="leftDrawer=!leftDrawer"/>
+    <q-header class="bg-grey-9 text-white" height-hint="98">
+      <header-content v-on:left-drawer="leftDrawer=!leftDrawer"/>
+    </q-header>
 
     <q-drawer v-model="leftDrawer" behavior="mobile">
       <drawer-content/>
@@ -18,12 +20,12 @@
 
 <script>
 import DrawerContent from '../components/drawer/DrawerContent'
-import SiteHeader from '../components/header/SiteHeader'
+import HeaderContent from '../components/header/HeaderContent'
 import SiteFooter from '../components/footer/SiteFooter'
 
 export default {
   name: 'MainLayout',
-  components: { SiteFooter, SiteHeader, DrawerContent },
+  components: { SiteFooter, HeaderContent, DrawerContent },
   data () {
     return {
       leftDrawer: false
