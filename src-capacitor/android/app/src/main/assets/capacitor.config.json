@@ -1,6 +1,6 @@
 {
   "appId": "ogp.gal",
-  "appName": "OGP Gal",
+  "appName": "OGP GAL | OGP ギャラリー",
   "bundledWebRuntime": false,
   "npmClient": "yarn",
   "webDir": "www",
@@ -14,8 +14,5 @@
         "twitter.com"
       ]
     }
-  },
-  "server": {
-    "url": "https://ogp-gal.com"
   }
 }
