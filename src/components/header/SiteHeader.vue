@@ -1,5 +1,5 @@
 <template>
-  <q-header class="bg-grey-9 text-white" height-hint="98" :class="$q.platform.is.capacitor && $q.platform.is.ios ? 'q-pt-md' : ''">
+  <q-header class="bg-blue-grey-10 text-white" height-hint="98" :class="$q.platform.is.capacitor && $q.platform.is.ios ? 'q-pt-md' : ''">
     <q-toolbar class="base-container">
       <q-toolbar-title>
         <q-btn :icon="$q.platform.is.mobile ? undefined : matBookmarkBorder" label="OGPギャラリー" flat class="text-weight-bolder" style="letter-spacing: 1px" size="lg" dense :to="{ name: 'top' }"/>
